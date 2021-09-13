@@ -1,0 +1,8 @@
+version: "3.8"
+services:
+  linuxtestcontainer:
+    build:
+      context: .
+    container_name: linuxtestcontainer
+    volumes:
+      - C:\repos:/repos
