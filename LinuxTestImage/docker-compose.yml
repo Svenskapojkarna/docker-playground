@@ -6,3 +6,12 @@ services:
     container_name: linuxtestcontainer
     volumes:
       - C:\repos:/repos
+
+  my-rabbit:
+    image: rabbitmq:3.7-management
+    ports:
+      - "9080:15672"
+      - "5772:5672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=agent
+      - RABBITMQ_DEFAULT_PASS=agent123
