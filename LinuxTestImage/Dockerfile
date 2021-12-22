@@ -5,7 +5,8 @@ ARG DEBIAN_FRONTEND=noninteractive
 # Install utility tools
 RUN apt-get update && apt-get install -y \
     wget \
-    vim
+    vim \
+    iputils-ping
 
 # Install mono
 RUN apt install -y gnupg ca-certificates && \
