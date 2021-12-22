@@ -6,7 +6,8 @@ ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update && apt-get install -y \
     wget \
     vim \
-    iputils-ping
+    iputils-ping \
+    netcat
 
 # Install mono
 RUN apt install -y gnupg ca-certificates && \
