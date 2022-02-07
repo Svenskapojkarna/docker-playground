@@ -21,11 +21,11 @@ RUN wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-p
     dpkg -i packages-microsoft-prod.deb && \
     rm packages-microsoft-prod.deb
 
-# Install .NET tools for testing
+# Install .NET6
 RUN apt-get update && apt-get install -y \
     apt-transport-https \
     dotnet-runtime-3.1 \
-    dotnet-sdk-5.0
+    dotnet-sdk-6.0
 
 # Keep the container running
 ENTRYPOINT ["tail", "-f", "/dev/null"]
