@@ -7,7 +7,10 @@ RUN apt-get update && apt-get install -y \
     wget \
     vim \
     iputils-ping \
-    netcat
+    netcat \
+    libgdiplus \
+    apt-utils \
+    libc6-dev
 
 # Install mono
 RUN apt install -y gnupg ca-certificates && \
@@ -21,11 +24,22 @@ RUN wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-p
     dpkg -i packages-microsoft-prod.deb && \
     rm packages-microsoft-prod.deb
 
+# Install dependencies required for .NET6 installation
+RUN echo "deb http://security.ubuntu.com/ubuntu focal-security main" | tee /etc/apt/sources.list.d/focal-security.list && \
+    apt-get update && \
+    apt-get install -y libssl1.1
+
 # Install .NET6
 RUN apt-get update && apt-get install -y \
-    apt-transport-https \
     dotnet-runtime-3.1 \
     dotnet-sdk-6.0
+
+# Fix .NET6 installation
+RUN apt remove -y 'dotnet*' && \
+    apt remove -y 'aspnetcore*' && \
+    rm /etc/apt/sources.list.d/microsoft-prod.list && \
+    apt update && \
+    apt install -y dotnet-sdk-6.0
 
 # Keep the container running
 ENTRYPOINT ["tail", "-f", "/dev/null"]
